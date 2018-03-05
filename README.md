@@ -10,11 +10,11 @@ Hound.yml files are set up for both.
 
 Install Quick Project Setup with curl
 
-`curl -o- https://raw.githubusercontent.com/kolyaventuri/quick_project_setup/blob/master/install.sh | bash`
+`curl -o- https://raw.githubusercontent.com/kolyaventuri/quick_project_setup/master/install.sh | bash`
 
 or wget
 
-`wget -qO- https://raw.githubusercontent.com/kolyaventuri/quick_project_setup/blob/master/install.sh | bash`
+`wget -qO- https://raw.githubusercontent.com/kolyaventuri/quick_project_setup/master/install.sh | bash`
 
 The install script clones the project to the ~/.quick_setup directory. You will need to add the following line to your bash profile (ex,. .bashrc, .bash_profile, or equivalent) for the script to load on terminal load. This process may be automated in a later release.
 
