@@ -47,5 +47,5 @@ for dir in "${DIRS[@]}"; do
 done
 echo $LOAD_LANG
 echo $LANG
-$DIR/modules/$LOAD_LANG/setup.sh
-$DIR/helpers/git.sh
+$DIR/modules/$LOAD_LANG/setup.sh $DIR $LOAD_LANG $CURR_PATH
+$DIR/helpers/git.sh $DIR $LOAD_LANG $CURR_PATH
