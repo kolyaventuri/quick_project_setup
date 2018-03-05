@@ -1,3 +1,5 @@
+#!/bin/sh
+
 part=$3
 lib="${part}/lib"
 test="${part}/test"

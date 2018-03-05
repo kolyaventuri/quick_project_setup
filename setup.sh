@@ -26,7 +26,7 @@ for dir in "${DIRS[@]}"; do
       for filename in "$DIR/modules/**/.alias"; do
         # Look through each module folder for .alias files
 
-        file="$(ls $filename | cut -f4 -d '/')"
+        file="$(ls $filename | rev | cut -f1 -d '/' | rev)"
         if [ "$file" == ".alias" ]; then
           # Get the alias file
           ALIASES=$(cat $filename) # Read in aliases
