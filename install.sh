@@ -15,8 +15,8 @@
 
     echo "Done installing!"
     echo ""
-    echo "Add the following to your ~/.bashrc to ~/.bash_profile to load on start"
-    echo "PATH=$PATH:$INSTALL_DIR/"
+    echo "Add the following to your ~/.bashrc or ~/.bash_profile to load on start"
+    echo "PATH=\$PATH:$INSTALL_DIR/"
   else
     echo "ERR: Quick setup already installed."
     echo "Run rm -r $INSTALL_DIR"
