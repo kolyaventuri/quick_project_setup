@@ -80,7 +80,7 @@
 
       if [[ $(cat $PROFILE) != *"$PROFILE_STRING"* ]]; then
         command printf "\n# Quick Setup Script\n" >> $PROFILE
-        command printf "${PROFILE_STRING}" >> $PROFILE
+        command printf $PROFILE_STRING >> $PROFILE
       fi
 
       echo "Script installed to $PROFILE"
