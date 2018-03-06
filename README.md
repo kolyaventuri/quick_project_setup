@@ -26,8 +26,8 @@ By default it uses the current directory, but a second argument overrides that. 
 
 ## Adding new modules
 
-New modules can be defined by creating a new `modules/[name]/setup.sh` file with all relevant bash instructions.
+New modules can be defined by creating a new `$QUICK_SETUP_DIR/modules/[name]/setup.sh` file with all relevant bash instructions.
 
-Any aliases for the module should be defined in the `modules/[name]/.alias` file. Ex, add _jscript_ to the `modules/javascript/.alias` file to make `setup jscript` an alias for `setup javascript`
+Any aliases for the module should be defined in the `$QUICK_SETUP_DIR/modules/[name]/.alias` file. Ex, add _jscript_ to the `$QUICK_SETUP_DIR/modules/javascript/.alias` file to make `setup jscript` an alias for `setup javascript`
 
-Default .gitingore files should be placed at `modules/[name]/.gitignore.template`
+Default .gitingore files should be placed at `$QUICK_SETUP_DIR/modules/[name]/.gitignore.template`
