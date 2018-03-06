@@ -49,7 +49,7 @@
     INSTALL_DIR="$HOME/.quick_setup"
     echo Installing to $INSTALL_DIR
     WORKING_DIR="$(pwd)"
-    PROFILE_STRING="[ -s "\$HOME/.quick_setup/setup" ] && \. "\$HOME/.quick_setup/setup""
+    PROFILE_STRING="export QUICK_SETUP_DIR=\"\$HOME/.quick_setup\"\n[ -s \"\$QUICK_SETUP_DIR/setup\" ] && \"\$QUICK_SETUP_DIR/setup\""
     PROFILE=$(detect_profile)
 
     if [ -z "${PROFILE-}" ] ; then
@@ -61,6 +61,7 @@
       echo "Create one of them and run this script again"
       echo "OR"
       echo "Append the following lines to the correct file yourself:"
+      echo ""
       command printf "${PROFILE_STRING}"
       return
     fi
@@ -78,16 +79,14 @@
       echo ""
 
       if [[ $(cat $PROFILE) != *"$PROFILE_STRING"* ]]; then
-        echo "" >> $PROFILE
-        echo "" >> $PROFILE
-        echo "# Load Quick Setup Script" >> $PROFILE
-        echo "" >> $PROFILE
-        echo $PROFILE_STRING >> $PROFILE
+        command printf "\n# Quick Setup Script\n" >> $PROFILE
+        command printf "${PROFILE_STRING}" >> $PROFILE
       fi
 
       echo "Script installed to $PROFILE"
       echo ""
       echo "Restart terminal or run the following command to use quick setup now"
+      echo ""
       command printf "${PROFILE_STRING}"
 
     else

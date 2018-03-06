@@ -1,50 +1,46 @@
-#!/bin/sh
+setup() {
+  local LOAD_LANG
+  LANG=$1
+  CURR_PATH=${2-$(pwd)}
+  SOURCE="${BASH_SOURCE[0]}"
 
-LANG=$1
-CURR_PATH=${2-$(pwd)}
-SOURCE="${BASH_SOURCE[0]}"
-DIR="$( dirname "$SOURCE" )"
+  DIRS=($QUICK_SETUP_DIR/modules/*)
+  DO_BREAK=0
+  LOAD_LANG=NULL
 
-# for filename in $DIR/modules/**/setup.sh; do
-#   echo "$filename"
-# done
+  for dir in "${DIRS[@]}"; do
+      dir="$(ls -d $dir | rev | cut -f1 -d '/' | rev)"
+      if [ "$dir" == "$LANG" ]; then
+        LOAD_LANG=$LANG
+        break # The language exists, load the module
+      else
+        if [ $DO_BREAK -eq 1 ]; then
+          break # We found the module already
+        fi
 
-DIR_LIST="$(ls -d $DIR/modules/* | rev | cut -f1 -d'/' | rev)"
-DIRS=($DIR_LIST)
-DO_BREAK=0
-LOAD_LANG=NULL
+        for filename in $QUICK_SETUP_DIR/modules/**/.alias; do
+          # Look through each module folder for .alias files
+          file="$(ls $filename | rev | cut -f1 -d '/' | rev)"
+          if [ "$file" == ".alias" ]; then
+            # Get the alias file
+            ALIASES=$(cat $filename) # Read in aliases
+            for alias in "${ALIASES[@]}"; do
+              if [ "$alias" == "$LANG" ]; then # Check against what we are looking for
+                DO_BREAK=1 # Set break flag
+                LOAD_LANG=$dir # Set the language name (directory)
+                LANG=$dir
+                break
+              fi
+            done
 
-for dir in "${DIRS[@]}"; do
-    if [ "$dir" == "$LANG" ]; then
-      LOAD_LANG=$LANG
-      break # The language exists, load the module
-    else
-      if [ $DO_BREAK -eq 1 ]; then
-        break # We found the module already
-      fi
-
-      for filename in "$DIR/modules/**/.alias"; do
-        # Look through each module folder for .alias files
-
-        file="$(ls $filename | rev | cut -f1 -d '/' | rev)"
-        if [ "$file" == ".alias" ]; then
-          # Get the alias file
-          ALIASES=$(cat $filename) # Read in aliases
-          for alias in "${ALIASES[@]}"; do
-            if [ "$alias" == "$LANG" ]; then # Check against what we are looking for
-              DO_BREAK=1 # Set break flag
-              LOAD_LANG=$dir # Set the language name (directory)
+            if [ $DO_BREAK -eq 1 ]; then # Stop looking through files if we have it
               break
             fi
-          done
-
-          if [ $DO_BREAK -eq 1 ]; then # Stop looking through files if we have it
-            break
           fi
-        fi
-      done
-    fi
-done
+        done
+      fi
+  done
 
-$DIR/modules/$LOAD_LANG/setup.sh $DIR $LOAD_LANG $CURR_PATH
-$DIR/helpers/git.sh $DIR $LOAD_LANG $CURR_PATH
+  $QUICK_SETUP_DIR/modules/$LOAD_LANG/setup.sh $QUICK_SETUP_DIR $LOAD_LANG $CURR_PATH
+  $QUICK_SETUP_DIR/helpers/git.sh $QUICK_SETUP_DIR $LOAD_LANG $CURR_PATH
+}
