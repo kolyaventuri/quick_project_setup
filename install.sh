@@ -49,7 +49,7 @@
     INSTALL_DIR="$HOME/.quick_setup"
     echo Installing to $INSTALL_DIR
     WORKING_DIR="$(pwd)"
-    PROFILE_STRING="export QUICK_SETUP_DIR=\"\$HOME/.quick_setup\"\n[ -s \"\$QUICK_SETUP_DIR/setup\" ] && \"\$QUICK_SETUP_DIR/setup\""
+    PROFILE_STRING="export QUICK_SETUP_DIR=\"\$HOME/.quick_setup\"\n[ -s \"\$QUICK_SETUP_DIR/setup\" ] && . \"\$QUICK_SETUP_DIR/setup\""
     PROFILE=$(detect_profile)
 
     if [ -z "${PROFILE-}" ] ; then
