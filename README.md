@@ -2,9 +2,7 @@
 
 Modular script for simple and easy project generation. Easy to expand upon if more things are needed.
 
-Currently implemented setup modules are for JavaScript on Node.JS and Ruby (with SimpleCov).
-
-Hound.yml files are set up for both.
+Modules can be installed with the qs command. See [Installing new modules](#installing-new-modules)
 
 ## Installation
 
