@@ -1,3 +1,4 @@
+#!/bin/sh
 setup() {
   local LOAD_LANG
   LANG=$1
@@ -40,7 +41,10 @@ setup() {
         done
       fi
   done
-
+  if [! -f $QUICK_SETUP_DIR/modules/$LOAD_LANG/setup.sh ]; then
+    echo "\033[91m[ERR]\033[39m No \"$1\" module installed."
+    exit 1
+  fi
   $QUICK_SETUP_DIR/modules/$LOAD_LANG/setup.sh $QUICK_SETUP_DIR $LOAD_LANG $CURR_PATH
   $QUICK_SETUP_DIR/helpers/git.sh $QUICK_SETUP_DIR $LOAD_LANG $CURR_PATH
 }
