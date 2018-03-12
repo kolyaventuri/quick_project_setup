@@ -41,7 +41,7 @@ setup() {
         done
       fi
   done
-  if [! -f $QUICK_SETUP_DIR/modules/$LOAD_LANG/setup.sh ]; then
+  if [ ! -f $QUICK_SETUP_DIR/modules/$LOAD_LANG/setup.sh ]; then
     echo "\033[91m[ERR]\033[39m No \"$1\" module installed."
     exit 1
   fi
