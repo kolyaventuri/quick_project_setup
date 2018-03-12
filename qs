@@ -7,7 +7,7 @@
       git ls-remote "github.com/quicksetup/$1" > /dev/null 2>&1
       if [ $? -eq 0 ]; then
         echo "Installing quicksetup/$1..."
-        git clone $url $QUICK_SETUP_DIR/$1 > /dev/null 2>&1
+        git clone $url $QUICK_SETUP_DIR/modules/$1 > /dev/null 2>&1
         echo "Done."
       else
         echo "\033[91m[ERR]\033[39m No \"$1\" Quick Setup module exists"
@@ -16,9 +16,9 @@
     }
 
     qs_verb_remove() {
-      if [ -d "$QUICK_SETUP_DIR/$1" ]; then
+      if [ -d "$QUICK_SETUP_DIR/modules/$1" ]; then
         echo "Uninstalling \"$1\" module..."
-        rm -r "$QUICK_SETUP_DIR/$1"
+        rm -r "$QUICK_SETUP_DIR/modules/$1"
         echo "Done."
       else
         echo "\033[91m[ERR]\033[39m No \"$1\" module installed."
@@ -27,10 +27,10 @@
     }
 
     qs_verb_update() {
-      if [ -d "$QUICK_SETUP_DIR/$1" ]; then
+      if [ -d "$QUICK_SETUP_DIR/modules/$1" ]; then
         echo "Updating \"$1\" module..."
         cur_dir=$(pwd)
-        cd "$QUICK_SETUP_DIR/$1"
+        cd "$QUICK_SETUP_DIR/modules/$1"
         git pull > /dev/null 2>&1
         cd $cur_dir
         echo "Done."
